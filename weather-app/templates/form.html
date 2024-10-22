@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Прогноз погоды</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='global.css') }}" />
+  </head>
+
+  <body>
+    <main class="page">
+      <h1 class="title">Прогноз погоды</h1>
+
+      <form class="form" method="POST" action="/weather">
+        <span class="field">
+          <label class="input-label" for="city-from">Откуда</label>
+          <input
+            class="city-input"
+            type="text"
+            id="city-from"
+            name="city-from"
+            placeholder="Москва"
+            required
+          />
+        </span>
+
+        <span class="field">
+          <label class="input-label" for="city-to">Куда</label>
+          <input
+            class="city-input"
+            type="text"
+            id="city-to"
+            name="city-to"
+            placeholder="Санкт-Петербург"
+            required
+          />
+        </span>
+
+        {% if error %}
+        <p class="error">{{ error }}</p>
+        {% endif %}
+
+        <button class="btn" type="submit">Получить прогноз</button>
+      </form>
+    </main>
+  </body>
+</html>
