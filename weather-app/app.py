@@ -37,10 +37,12 @@ def weather():
 
     weather_cities = []
     for city in [city_from, city_to]:
-        location_key = get_location_key_by_city_name(city)
-        if isinstance(location_key, dict) and location_key.get("error", False):
-            app.logger.error(location_key.get("message"))
-            return redirect(url_for('index', error=location_key.get("message")))
+        location_data = get_location_key_by_city_name(city)
+        if location_data.get("error", False):
+            app.logger.error(location_data.get("message"))
+            return redirect(url_for('index', error=location_data.get("message")))
+        
+        location_key = location_data.get("key")
 
         weather_data = get_weather(location_key)
         if isinstance(weather_data, dict) and weather_data.get("error", False):

@@ -21,32 +21,14 @@ def save_cache(cache):
 
 location_cache = load_cache()
 
-@lru_cache(maxsize=None)  
-def get_location_key_by_coordinates(lat, lon):
-    cache_key = (lat, lon)
-    if cache_key in location_cache:
-      return location_cache[cache_key]
-
-    url = f"http://dataservice.accuweather.com/locations/v1/cities/geoposition/search"
-    params = {
-        "apikey": API_KEY,
-        "q": f"{lat},{lon}"
-    }
-    response = requests.get(url, params=params)
-    if response.ok:
-        data = response.json()
-        result = data.get("Key")
-        # Сохраняем результат в кэше (файл), чтобы сохранилось при перезапуске
-        location_cache[cache_key] = result
-        save_cache(location_cache)
-        return result
-    else:
-        return {"error": True, "message": response.text, "code": response.status_code}
-
 @lru_cache(maxsize=None) 
 def get_location_key_by_city_name(location):
+    """
+    Возвращает словарь с ключом местоположения для дальнейшей передачи его в API.
+    При возникновении ошибки возвращает словарь с ошибкой.
+    """
     if location in location_cache:
-        return location_cache[location]
+        return {"error": False, "key": location_cache[location]}
 
     url = f"http://dataservice.accuweather.com/locations/v1/cities/search"
     params = {
@@ -63,6 +45,6 @@ def get_location_key_by_city_name(location):
         # Сохраняем результат в кэше (файл), чтобы сохранилось при перезапуске
         location_cache[location] = result
         save_cache(location_cache)
-        return result
+        return {"error": False, "key": result}
     else:
         return {"error": True, "message": response.text, "code": response.status_code}
