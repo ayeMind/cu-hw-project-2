@@ -182,6 +182,14 @@
         "precipitation": 0,
         "cloud_cover": 10,
         "pressure": 1050
+    },
+    {
+        "temperature": 10.5,
+        "humidity": 99,
+        "wind_speed": 8.3,
+        "precipitation": 0,
+        "cloud_cover": 77,
+        "pressure": 1033
     }
 ]
 

@@ -66,7 +66,7 @@ def classify_weather(weather_data):
    
     # Влияние атмосферного давления
     if abs(pressure - 1013) > 15: 
-        score += (abs(pressure - 1013) - 15) * 2 
+        score += max(0, (abs(pressure - 1013) - 15)) # Разница до 15 от нормы не критична, далее может быть негативное влияние на человека
     
     # print("SCORE", score)
             
