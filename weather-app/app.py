@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 from utils.weather import get_weather
 from utils.location import get_location_key_by_city_name
 from utils.model import classify_weather
@@ -17,10 +17,6 @@ class DualHandler(logging.Handler):
 handler = DualHandler()
 app.logger.addHandler(handler)
 app.logger.setLevel(logging.INFO) 
-
-from flask import Flask, render_template, request, redirect, url_for
-
-app = Flask(__name__)
 
 @app.route("/", methods=["GET", "POST"])
 def index():
