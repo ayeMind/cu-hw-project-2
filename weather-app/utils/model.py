@@ -1,7 +1,7 @@
 def classify_weather(weather_data):
     """
     Принимает словарь с основными параметрами погоды
-    (температура, влажность, ветер, осадки, облачность, атмосферное давление)
+    (температура, влажность, скорость ветра, количество осадков, облачность)
     и возвращает оценку погоды (прекрасная, хорошая, нормальная, плохая, отвратительная)
     """
     if not weather_data:
@@ -10,9 +10,8 @@ def classify_weather(weather_data):
     temperature = weather_data["temperature"] # в градусах цельсия
     humidity = weather_data["humidity"] # в процентах
     wind_speed = weather_data["wind_speed"] # в км/ч
-    precipitation = weather_data["precipitation"] # в миллиметрах
+    precipitation = weather_data["precipitation"] # в мм
     cloud_cover = weather_data["cloud_cover"] # в процентах
-    pressure = weather_data["pressure"] # в миллибарах
     
     score = 0 # Оценка погоды, чем меньше, тем лучше
 
@@ -63,12 +62,6 @@ def classify_weather(weather_data):
     # Влияние облачности
     if cloud_cover > 50:
         score += (cloud_cover - 50) // 10 
-   
-    # Влияние атмосферного давления
-    if abs(pressure - 1013) > 15: 
-        score += max(0, (abs(pressure - 1013) - 15)) # Разница до 15 от нормы не критична, далее может быть негативное влияние на человека
-    
-    # print("SCORE", score)
             
     # Результат
     if score < 5:
@@ -83,8 +76,8 @@ def classify_weather(weather_data):
         return "Отвратительная погода"
 
 # Примеры для проверки работы модели
-# import json
-# with open('tests.json', 'r') as f:
-#     tests = json.load(f)
-#     for test in tests:
-#         print(test, classify_weather(test))
+import json
+with open('tests.json', 'r') as f:
+    tests = json.load(f)
+    for test in tests:
+        print(test, classify_weather(test))

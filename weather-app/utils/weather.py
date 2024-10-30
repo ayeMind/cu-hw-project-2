@@ -39,19 +39,23 @@ def parse_five_days_weather(weather_data):
     
     result_list = []
     for day in weather_data["DailyForecasts"]:
+        
+        def get_precipation(name):
+            if name == "Snow":
+                return day["Day"]["Snow"]["Value"] * 10 # Дается в API в см, пока все остальное - в мм
+            return day["Day"][name]["Value"]
+        
         temperature = get_mean(day["Temperature"])
-        real_temperature = get_mean(day["RealFeelTemperature"])
         relative_humidity = day["Day"]["RelativeHumidity"]["Average"]
-        precipation_probability = day["Day"].get("PrecipitationProbability")
+        precipation_mm = get_precipation("Snow") + get_precipation("Rain") + get_precipation("Ice")
         wind_speed = day["Day"]["Wind"]["Speed"]["Value"]
         cloud_cover = day["Day"].get("CloudCover")
-        
+                
         result = {
             "delta_days": get_delta_days_text(get_delta_days(day)),
             "temperature": temperature,
-            "real_temperature": real_temperature,
             "humidity": relative_humidity,
-            "precipitation": precipation_probability,
+            "precipitation": precipation_mm,
             "wind_speed": wind_speed,
             "cloud_cover": cloud_cover
         }
