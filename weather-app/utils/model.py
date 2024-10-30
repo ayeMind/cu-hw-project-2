@@ -76,8 +76,8 @@ def classify_weather(weather_data):
         return "Отвратительная погода"
 
 # Примеры для проверки работы модели
-import json
-with open('tests.json', 'r') as f:
-    tests = json.load(f)
-    for test in tests:
-        print(test, classify_weather(test))
+# import json
+# with open('tests.json', 'r') as f:
+#     tests = json.load(f)
+#     for test in tests:
+#         print(test, classify_weather(test))

@@ -131,3 +131,13 @@ body {
   font-weight: bold;
   color: #333;
 }
+
+.add-btn {
+  margin-top: 1rem;
+  background-color: #28a745;
+}
+
+.remove-btn {
+  margin-top: 1rem;
+  background-color: #dc3545;
+}

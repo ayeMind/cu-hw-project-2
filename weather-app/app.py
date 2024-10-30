@@ -27,12 +27,13 @@ def index():
 def weather():
     city_from = request.form.get("city-from")
     city_to = request.form.get("city-to")
+    cities_intermediate = request.form.getlist("city-intermediate")
 
     if not city_from or not city_to:
         return redirect(url_for('index', error="Ошибка ввода города. Попробуйте еще раз."))
 
     weather_cities = []
-    for city in [city_from, city_to]:
+    for city in [city_from] + cities_intermediate + [city_to]:
         location_data = get_location_key_by_city_name(city)
         if location_data.get("error", False):
             app.logger.error(location_data.get("message"))
@@ -54,6 +55,7 @@ def weather():
 
     weather_dict = {
         "weather_from": weather_cities[0],
+        "weather_intermediate": weather_cities[1:-1],
         "weather_to": weather_cities[1],
     }
 

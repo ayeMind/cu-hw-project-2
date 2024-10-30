@@ -10,7 +10,7 @@ def parse_five_days_weather(weather_data):
     """
     Принимает прогноз погоды из API и возвращает список из словарей с погодой на 5 дней
     (температура, относительная влажность, вероятность осадков, скорость ветра, реальное ощущение температуры, облачность)
-    возращая среднее между минимумом и максимумом для каждого параметра
+    возращая среднее между минимумом и максимумом для каждого параметра (если дается именно так)
     """
     if not weather_data:
         return None
@@ -64,7 +64,10 @@ def parse_five_days_weather(weather_data):
         
     return result_list
             
-def get_five_days_weather(location_key):
+def get_weather(location_key):
+    """
+    Получет прогноз погоды на 5 дней по местоположению из API
+    """
     url = f"http://dataservice.accuweather.com/forecasts/v1/daily/5day/{location_key}"
     params = {"apikey": API_KEY, "details": "true", "metric": "true"}
     response = requests.get(url, params=params)
