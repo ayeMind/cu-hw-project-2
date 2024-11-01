@@ -1,8 +1,10 @@
 from flask import Flask
 from routes import register_blueprints
+import secrets
 
 def init_app():
     app = Flask(__name__)
+    app.secret_key = secrets.token_hex(16)
 
     with app.app_context():
         from dashboard import init_dashboard

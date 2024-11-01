@@ -141,3 +141,21 @@ body {
   margin-top: 1rem;
   background-color: #dc3545;
 }
+
+.add-btn:hover {
+  background-color: #218838;
+}
+
+.remove-btn:hover {
+  background-color: #bd2130;
+}
+
+.dash-container {
+  width: 1200px;
+  height: 550px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

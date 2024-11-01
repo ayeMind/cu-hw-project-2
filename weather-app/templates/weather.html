@@ -8,6 +8,9 @@
   <body>
     <main class="page">
       <h1 class="title">Прогноз погоды</h1>
+      {% if weather %}
+        <iframe src="/dash/" class="dash-container"></iframe>
+      {% endif %}
       {% if not weather %}
         <p class="error">Не удалось получить данные о погоде. Попробуйте позже.</p>
       {% endif %}
