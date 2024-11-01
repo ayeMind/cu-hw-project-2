@@ -12,7 +12,8 @@ def create_dataframe(weather_cities: list) -> DataFrame:
             "humidity": [],
             "precipitation": [],
             "wind_speed": [],
-            "cloud_cover": []
+            "cloud_cover": [],
+            "result": []
         })
         
     all_data = []

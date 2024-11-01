@@ -65,15 +65,15 @@ def classify_weather(weather_data):
             
     # Результат
     if score < 5:
-        return "Прекрасная погода"
+        return "Прекрасная"
     elif score < 10:
-        return "Хорошая погода"
+        return "Хорошая"
     elif score < 15:
-        return "Нормальная погода"
+        return "Нормальная"
     elif score < 20:
-        return "Плохая погода"
+        return "Плохая"
     else:
-        return "Отвратительная погода"
+        return "Отвратительная"
 
 # Примеры для проверки работы модели
 # import json

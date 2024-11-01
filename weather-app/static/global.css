@@ -6,7 +6,7 @@ body {
   font-family: sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f4f4f4;
+  background-color: #ffffff;
 }
 
 .page {
@@ -152,7 +152,7 @@ body {
 
 .dash-container {
   width: 1200px;
-  height: 550px;
+  height: 750px;
   position: relative;
   overflow: hidden;
   display: flex;

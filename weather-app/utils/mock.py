@@ -1,3 +1,5 @@
+# Требуется только для тестирования
+
 def get_mock_weather_cities():
     """
     Возвращает пример данных о погоде для 5-ти городов после преобразования
@@ -11,7 +13,8 @@ def get_mock_weather_cities():
             "humidity": 50,
             "precipitation": 0,
             "wind_speed": 10,
-            "cloud_cover": 20
+            "cloud_cover": 20,
+            "result": "Прекрасная"
         },
         {
             "date": "Завтра",
@@ -20,7 +23,8 @@ def get_mock_weather_cities():
             "humidity": 55,
             "precipitation": 5,
             "wind_speed": 12,
-            "cloud_cover": 30
+            "cloud_cover": 30,
+            "result": "Хорошая"
         },
         {
             "date": "Послезавтра",
@@ -29,7 +33,8 @@ def get_mock_weather_cities():
             "humidity": 60,
             "precipitation": 0,
             "wind_speed": 8,
-            "cloud_cover": 15
+            "cloud_cover": 15,
+            "result": "Нормальная"
         },
         {
             "date": "Через 3 дня",
@@ -38,7 +43,8 @@ def get_mock_weather_cities():
             "humidity": 65,
             "precipitation": 10,
             "wind_speed": 15,
-            "cloud_cover": 40
+            "cloud_cover": 40,
+            "result": "Плохая"
         },
         {
             "date": "Через 4 дня",
@@ -47,7 +53,8 @@ def get_mock_weather_cities():
             "humidity": 70,
             "precipitation": 0,
             "wind_speed": 10,
-            "cloud_cover": 25
+            "cloud_cover": 25,
+            "result": "Отвратительная"
         }
     ],
     [
@@ -58,7 +65,8 @@ def get_mock_weather_cities():
             "humidity": 70,
             "precipitation": 20,
             "wind_speed": 15,
-            "cloud_cover": 60
+            "cloud_cover": 60,
+            "result": "Прекрасная"
         },
         {
             "date": "Завтра",
@@ -67,7 +75,8 @@ def get_mock_weather_cities():
             "humidity": 75,
             "precipitation": 10,
             "wind_speed": 12,
-            "cloud_cover": 50
+            "cloud_cover": 50,
+            "result": "Хорошая"
         },
         {
             "date": "Послезавтра",
@@ -76,7 +85,8 @@ def get_mock_weather_cities():
             "humidity": 80,
             "precipitation": 5,
             "wind_speed": 10,
-            "cloud_cover": 40
+            "cloud_cover": 40,
+            "result": "Нормальная"
         },
         {
             "date": "Через 3 дня",
@@ -85,7 +95,8 @@ def get_mock_weather_cities():
             "humidity": 85,
             "precipitation": 0,
             "wind_speed": 8,
-            "cloud_cover": 30
+            "cloud_cover": 30,
+            "result": "Плохая"
         },
         {
             "date": "Через 4 дня",
@@ -94,7 +105,8 @@ def get_mock_weather_cities():
             "humidity": 90,
             "precipitation": 15,
             "wind_speed": 10,
-            "cloud_cover": 50
+            "cloud_cover": 50, 
+            "result": "Отвратительная"
         }
     ],
     [
@@ -105,7 +117,8 @@ def get_mock_weather_cities():
             "humidity": 30,
             "precipitation": 0,
             "wind_speed": 5,
-            "cloud_cover": 10
+            "cloud_cover": 10,
+            "result": "Прекрасная"
         },
         {
             "date": "Завтра",
@@ -114,7 +127,8 @@ def get_mock_weather_cities():
             "humidity": 35,
             "precipitation": 2,
             "wind_speed": 7,
-            "cloud_cover": 15
+            "cloud_cover": 15,
+            "result": "Хорошая"
         },
         {
             "date": "Послезавтра",
@@ -123,7 +137,8 @@ def get_mock_weather_cities():
             "humidity": 40,
             "precipitation": 0,
             "wind_speed": 10,
-            "cloud_cover": 20
+            "cloud_cover": 20,
+            "result": "Нормальная"
         },
         {
             "date": "Через 3 дня",
@@ -132,7 +147,8 @@ def get_mock_weather_cities():
             "humidity": 45,
             "precipitation": 5,
             "wind_speed": 12,
-            "cloud_cover": 25
+            "cloud_cover": 25,
+            "result": "Плохая"
         },
         {
             "date": "Через 4 дня",
@@ -141,7 +157,8 @@ def get_mock_weather_cities():
             "humidity": 50,
             "precipitation": 0,
             "wind_speed": 8,
-            "cloud_cover": 15
+            "cloud_cover": 15,
+            "result": "Отвратительная"
         }
     ]
 ]

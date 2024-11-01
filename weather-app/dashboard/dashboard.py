@@ -1,7 +1,8 @@
 import dash
 import plotly.express as px
 from flask import Flask, session
-from dash import dcc, html, Input, Output
+from dash import dcc, html, Input, Output, dash_table
+import pandas as pd
 
 from utils import create_dataframe
 
@@ -9,14 +10,16 @@ def init_dashboard(app: Flask):
 
     @dash.callback(
         Output("graph", "figure"),
+        Output("table-container", "children"),
         Input("urzl", "pathname"),
         Input("parameter-dropdown", "value") 
     )
-    def update_graph(pathname, selected_parameter):
+    # Вызывается автоматически
+    def update_graph_and_table(pathname, selected_parameter): 
         if pathname == "/dash/":
             weather_cities = session.get("weather_cities")
             if weather_cities is None:
-                return dash.no_update
+                return dash.no_update, dash.no_update 
             df = create_dataframe(weather_cities)
 
             if selected_parameter is None:  
@@ -32,11 +35,24 @@ def init_dashboard(app: Flask):
                 "city": "Город"  
             }
 
-            return px.line(df, 
-                         x="date", 
-                         y=selected_parameter, 
-                         color="city",
-                         labels=labels) 
+            figure = px.line(df, 
+                             x="date", 
+                             y=selected_parameter, 
+                             color="city",
+                             labels=labels) 
+
+            pivot_table = pd.pivot_table(df, values='result', index='date', columns='city', aggfunc=lambda x: x) \
+                .reset_index() \
+                .rename(columns={'date': 'Дата'})
+
+            table = dash_table.DataTable(
+                id='result-table',
+                columns=[{'name': col, 'id': col} for col in pivot_table.columns],
+                data=pivot_table.reset_index().to_dict('records'),
+                style_cell={'textAlign': 'center'} 
+            )
+
+            return figure, table
 
 
     dash_module = dash.Dash(
@@ -60,6 +76,7 @@ def init_dashboard(app: Flask):
             style={"width": "200px", "margin-bottom": "10px"}
         ),
         dcc.Graph(id="graph", style={"width": "100%"}),
+        html.Div(id="table-container", style={"margin-top": "20px"}) 
     ], style={"height": "auto", "width": "100%", "position": "relative"})
 
     return dash_module.server
