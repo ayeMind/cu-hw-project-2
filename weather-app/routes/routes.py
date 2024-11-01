@@ -1,7 +1,7 @@
 from flask import render_template, request, redirect, url_for, Blueprint, session, jsonify
 from utils import get_location_key_by_city_name, get_weather, process_weather_data, get_mock_weather_cities
 
-USE_REAL_WEATHER = False
+USE_REAL_WEATHER = True
 
 index_bp = Blueprint('index_bp', __name__, url_prefix='/')
 
@@ -14,7 +14,7 @@ def index():
 def weather():
     number_of_days = int(request.args.get("days") or request.form.get("amount") or 5)
 
-    if USE_REAL_WEATHER == True:
+    if USE_REAL_WEATHER == False:
         weather_cities = get_mock_weather_cities()
         weather_cities = [city_data[0:number_of_days] for city_data in weather_cities]
         session["weather_cities"] = weather_cities
