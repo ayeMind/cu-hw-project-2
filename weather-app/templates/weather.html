@@ -8,68 +8,6 @@
   <body>
     <main class="page">
       <h1 class="title">Прогноз погоды</h1>
-
-      {% if weather %}
-      <div class="weather-container">
-        <div class="weather-card">
-          <h3>{{ weather.weather_from.city }}</h3>
-          <table>
-            <tr>
-              <th>Температура</th>
-              <td>{{ weather.weather_from.temperature }}°C</td>
-            </tr>
-            <tr>
-              <th>Влажность</th>
-              <td>{{ weather.weather_from.humidity }}%</td>
-            </tr>
-            <tr>
-              <th>Скорость ветра</th>
-              <td>{{ weather.weather_from.wind_speed }} км/ч</td>
-            </tr>
-            <tr>
-              <th>Осадки</th>
-              <td>{{ weather.weather_from.precipitation }} мм</td>
-            </tr>
-            <tr>
-              <th>Облачность</th>
-              <td>{{ weather.weather_from.cloud_cover }}%</td>
-            </tr>
-          </table>
-          <div class="result-container">
-            <p class="result">{{ weather.weather_from.result }}</p>
-          </div>
-        </div>
-        <div class="weather-card">
-          <h3>{{ weather.weather_to.city }}</h3>
-          <table>
-            <tr>
-              <th>Температура</th>
-              <td>{{ weather.weather_to.temperature }}°C</td>
-            </tr>
-            <tr>
-              <th>Влажность</th>
-              <td>{{ weather.weather_to.humidity }}%</td>
-            </tr>
-            <tr>
-              <th>Скорость ветра</th>
-              <td>{{ weather.weather_to.wind_speed }} км/ч</td>
-            </tr>
-            <tr>
-              <th>Осадки</th>
-              <td>{{ weather.weather_to.precipitation }} мм</td>
-            </tr>
-            <tr>
-              <th>Облачность</th>
-              <td>{{ weather.weather_to.cloud_cover }}%</td>
-            </tr>
-          </table>
-          <div class="result-container">
-            <p class="result">{{ weather.weather_to.result }}</p>
-          </div>
-        </div>
-      </div>
-      {% endif %} 
-
       {% if not weather %}
         <p class="error">Не удалось получить данные о погоде. Попробуйте позже.</p>
       {% endif %}
