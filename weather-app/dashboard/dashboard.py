@@ -73,9 +73,10 @@ def init_dashboard(app: Flask):
             ],
             value="temperature",
             clearable=False, 
-            style={"width": "200px", "margin-bottom": "10px"}
+            style={"width": "200px"}
         ),
         dcc.Graph(id="graph", style={"width": "100%"}),
+        html.H3(id="table-title", style={"margin-left": "20px"}, children="Оценка погоды"),
         html.Div(id="table-container", style={"margin-top": "20px"}) 
     ], style={"height": "auto", "width": "100%", "position": "relative"})
 
