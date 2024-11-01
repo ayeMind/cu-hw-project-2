@@ -22,10 +22,10 @@ forecast_interval_kb = InlineKeyboardMarkup(
     ]
 )
 
-location_kb = ReplyKeyboardMarkup(keyboard=[[KeyboardButton(text="Отправить геолокацию", request_location=True)]], resize_keyboard=True)
-
+location_kb = ReplyKeyboardMarkup(keyboard=[[KeyboardButton(text="Отправить геолокацию", request_location=True)]], resize_keyboard=True, one_time_keyboard=True)
 
 def check_city_in_accuweather(city):
+    # Если не получилось превратить в JSON, то API обработало данные, т.е. город нашло
     try:
         requests.get(f"http://localhost:5000/weather?from={city}&to={city}&days={5}").json()
         return False
@@ -50,7 +50,10 @@ def reverse_geocode(lat, lon):
 @router.message(WeatherForm.start_point)
 async def process_location(message: Message, state: FSMContext):
     location = message.location
-    city_name = reverse_geocode(location.latitude, location.longitude) 
+    if location:
+        city_name = reverse_geocode(location.latitude, location.longitude) 
+    else:
+        city_name = message.text
 
     if city_name:
         await state.update_data(start_point=city_name)
@@ -78,6 +81,7 @@ async def process_end_point(message: Message, state: FSMContext):
     await state.update_data(end_point=message.text)
     await message.answer(f"Вы выбрали город {message.text}. Выберите временной интервал прогноза:", reply_markup=forecast_interval_kb)
 
+
 @router.callback_query(lambda c: c.data in ["3_days", "4_days", "5_days"])
 async def process_forecast_interval(callback_query: CallbackQuery, state: FSMContext):
     user_data = await state.get_data()
@@ -91,6 +95,6 @@ async def process_forecast_interval(callback_query: CallbackQuery, state: FSMCon
 
     url = f"http://localhost:5000/weather?from={start_point_encoded}&to={end_point_encoded}&days={days}"
     
-    await callback_query.message.answer(f"Прогноз погоды на {days} дней:\n\n{url}")
+    await callback_query.message.edit_text(f"Прогноз погоды на {days} дней:\n\n{url}", reply_markup=None) 
     await state.clear()
     await callback_query.answer()

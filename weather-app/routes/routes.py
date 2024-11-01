@@ -34,7 +34,7 @@ def weather():
         if request.args.get("from"):
             return jsonify({'error': "Ошибка ввода города. Попробуйте еще раз."}), 400
         else:
-            return redirect(url_for('index', error="Ошибка ввода города. Попробуйте еще раз."))
+            return redirect(url_for('index_bp.index', error="Ошибка ввода города. Попробуйте еще раз."))
 
     weather_cities = []
     for city in cities:
@@ -44,8 +44,7 @@ def weather():
             if request.args.get("from"):
                 return jsonify({'error': location_data.get("message")}), 400
             else:
-                index_bp.logger.error(location_data.get("message"))
-                return redirect(url_for('index', error=location_data.get("message")))
+                return redirect(url_for('index_bp.index', error=location_data.get("message")))
 
         location_key = location_data.get("key")
         weather_data = get_weather(location_key)
@@ -54,7 +53,7 @@ def weather():
             if request.args.get("from"):
                 return jsonify({'error': "Не удалось получить данные о погоде. Попробуйте позже."}), 500
             else:
-                return redirect(url_for('index', error="Не удалось получить данные о погоде. Попробуйте позже."))
+                return redirect(url_for('index_bp.index', error="Не удалось получить данные о погоде. Попробуйте позже."))
 
         process_weather_data(weather_data, city)
         weather_cities.append(weather_data)
