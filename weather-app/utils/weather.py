@@ -82,5 +82,5 @@ def process_weather_data(weather_data, city: str):
         if not result_of_model:
             raise ValueError("Не удалось определить погоду. Попробуйте еще раз.")
         
-        weather_day["result_of_model"] = result_of_model
+        weather_day["result"] = result_of_model
         weather_day["city"] = city

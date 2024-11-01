@@ -55,11 +55,11 @@
       
       function addField() {
         const fields = document.querySelectorAll(".field");
-        const lastField = fields[fields.length - 1];
+        const lastField = fields[fields.length - 2];
         const newField = document.createElement("span"); 
         newField.innerHTML = `
           <span class="field">
-            <label class="input-label" for="city-intermediate">Промежуточный город ${fields.length - 1}</label>
+            <label class="input-label" for="city-intermediate">Промежуточный город ${fields.length - 2}</label>
             <input
               class="city-input"
               type="text"

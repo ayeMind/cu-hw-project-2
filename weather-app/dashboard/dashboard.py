@@ -40,16 +40,29 @@ def init_dashboard(app: Flask):
                              y=selected_parameter, 
                              color="city",
                              labels=labels) 
+            
+            def custom_sort_key(dates):
+                date_order = {
+                    "Сегодня": 0,
+                    "Завтра": 1,
+                    "Послезавтра": 2,
+                    "Через 3 дня": 3,
+                    "Через 4 дня": 4,
+                }
+                return [date_order.get(date, 5) for date in dates]
 
             pivot_table = pd.pivot_table(df, values='result', index='date', columns='city', aggfunc=lambda x: x) \
                 .reset_index() \
-                .rename(columns={'date': 'Дата'})
+                .rename(columns={'date': 'Дата'}) \
+                .sort_values(by='Дата', key=custom_sort_key)
+                
+            print(pivot_table)
 
             table = dash_table.DataTable(
                 id='result-table',
                 columns=[{'name': col, 'id': col} for col in pivot_table.columns],
                 data=pivot_table.reset_index().to_dict('records'),
-                style_cell={'textAlign': 'center'} 
+                style_cell={'textAlign': 'center'}, 
             )
 
             return figure, table
