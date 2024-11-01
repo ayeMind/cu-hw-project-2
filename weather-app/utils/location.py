@@ -48,3 +48,4 @@ def get_location_key_by_city_name(location):
         return {"error": False, "key": result}
     else:
         return {"error": True, "message": response.text, "code": response.status_code}
+    
